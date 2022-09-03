@@ -1,6 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux';
 
-import { addContact as addContactAction, removeContact, updateFilter } from '../contactsSlice';
+import {
+  addContact as addContactAction,
+  removeContact,
+  updateFilter,
+} from '../Redux/contactsSlice';
 // import contacts from 'Data/contacts.json';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
@@ -8,8 +12,8 @@ import { ContactList } from './ContactList/ContactList';
 import css from 'components/App.module.css';
 
 export const App = () => {
-  const contacts = useSelector((state) => state.contacts.items || []);
-  const filter = useSelector((state) => state.contacts.filter || '');
+  const contacts = useSelector(state => state.contacts.items ?? []);
+  const filter = useSelector(state => state.contacts.filter ?? '');
   const dispatch = useDispatch();
 
   const handleFilterChange = e => {
@@ -17,11 +21,11 @@ export const App = () => {
   };
 
   const addContact = (name, number) => {
-    dispatch(addContactAction({name, number}))
+    dispatch(addContactAction({ name, number }));
   };
 
   const deleteContact = contactId => {
-    dispatch(removeContact(contactId))
+    dispatch(removeContact(contactId));
   };
 
   const searchContact = filter.toLowerCase();

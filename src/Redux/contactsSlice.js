@@ -3,7 +3,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { nanoid } from 'nanoid';
 
 const initialState = {
-  items: [],
+  items: JSON.parse(localStorage.getItem('contacts')) || [],
   filter: '',
 };
 
@@ -22,9 +22,11 @@ export const contactsSlice = createSlice({
       }
 
       state.items.push(payload);
+      localStorage.setItem('contacts', JSON.stringify(state.items));
     },
     removeContact: (state, action) => {
       state.items = state.items.filter(({ id }) => id !== action.payload);
+      localStorage.setItem('contacts', JSON.stringify(state.items));
     },
     updateFilter: (state, action) => {
       state.filter = action.payload;
